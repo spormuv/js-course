@@ -21,6 +21,8 @@ body {
 
   position: relative;
   display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
   align-items: flex-start;
   justify-content: center;
 
@@ -103,4 +105,22 @@ p {
   left: 0;
 
   z-index: 5;
+}
+
+/* media
+-------------------------------*/
+
+@media (max-width: 733px) {
+  .show-modal {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
 }
