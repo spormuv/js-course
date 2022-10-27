@@ -1,0 +1,70 @@
+.operation {
+  border-radius: 1rem;
+  padding: 3rem 4rem;
+  color: #333;
+  &--transfer {
+    background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+  }
+  &--loan {
+    background-image: linear-gradient(to top left, #39b385, #9be15d);
+  }
+  &--close {
+    background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  }
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 2.5fr 2.5fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.4rem 1rem;
+  &.form--loan {
+    grid-template-columns: 2.5fr 1fr 2.5fr;
+  }
+  &__label {
+    &--loan {
+      grid-row: 2;
+    }
+  }
+  &__input {
+    width: 100%;
+    padding: 0.3rem 1rem;
+
+    font-family: inherit;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+
+    border: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 0.7rem;
+    transition: all 0.3s;
+    &:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+  }
+  &__label {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  &__btn {
+    border: none;
+    border-radius: 0.7rem;
+    font-size: 1.8rem;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:focus {
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
