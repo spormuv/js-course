@@ -72,8 +72,6 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 // balance
 
 const calcDisplayBalance = (movements) => {
@@ -81,27 +79,26 @@ const calcDisplayBalance = (movements) => {
   labelBalance.textContent = `${balance} \u20AC`;
 };
 
-calcDisplayBalance(account1.movements);
+// summary
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov);
   labelSumIn.textContent = `${incomes}\u20AC`;
 
-  const out = movements
+  const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov);
   labelSumOut.textContent = `${Math.abs(out)}\u20AC`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
-    .map((deposit) => (deposit * 1.2) / 100)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int) => int >= 1)
     .reduce((acc, int) => acc + int);
   labelSumInterest.textContent = `${interest}\u20AC`;
 };
-calcDisplaySummary(account1.movements);
 
 // username
 
@@ -111,3 +108,30 @@ const createUsernames = (accs) => {
   });
 };
 createUsernames(accounts);
+
+// Login
+
+let currentAccoumt;
+
+btnLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  currentAccoumt = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  if (currentAccoumt?.pin === +inputLoginPin.value) {
+    // display UI & message
+    labelWelcome.innerHTML = `Welcome back, ${
+      currentAccoumt.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 1;
+    //clear inputs fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    //display movements
+    displayMovements(currentAccoumt.movements);
+    //display balance
+    calcDisplayBalance(currentAccoumt.movements);
+    //display summary
+    calcDisplaySummary(currentAccoumt);
+  }
+});
