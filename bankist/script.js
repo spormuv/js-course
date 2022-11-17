@@ -2,18 +2,18 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Joseph Schetz',
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2, // %
   pin: 1111,
   movementsDates: [
-    '2019-11-18T21:31:17.178Z',
-    '2019-12-23T07:42:02.383Z',
-    '2020-01-28T09:15:04.904Z',
-    '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2020-11-12T17:01:17.194Z',
-    '2022-11-15T19:36:17.929Z',
+    '2020-07-18T21:31:17.178Z',
+    '2020-10-13T07:42:02.383Z',
+    '2021-01-25T09:13:04.904Z',
+    '2021-04-01T10:19:24.185Z',
+    '2021-08-08T14:11:59.604Z',
+    '2022-03-12T17:01:17.194Z',
+    '2022-09-04T19:36:17.929Z',
     '2022-11-16T10:51:36.790Z',
   ],
   currency: 'EUR',
@@ -21,19 +21,19 @@ const account1 = {
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: 'Jennifer Davis',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
   movementsDates: [
-    '2019-11-01T13:15:33.035Z',
-    '2019-11-30T09:48:16.867Z',
-    '2019-12-25T06:04:23.907Z',
-    '2020-01-25T14:18:46.235Z',
-    '2020-02-05T16:33:06.386Z',
-    '2020-04-10T14:43:26.374Z',
-    '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
+    '2019-12-01T13:15:33.035Z',
+    '2020-11-30T09:48:16.867Z',
+    '2020-12-25T06:04:23.907Z',
+    '2021-01-25T14:18:46.235Z',
+    '2021-02-05T16:33:06.386Z',
+    '2022-04-10T14:43:26.374Z',
+    '2022-06-25T18:49:59.371Z',
+    '2022-11-15T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -166,17 +166,34 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-// Login
+//login
+//timer
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, '0');
+    const sec = String(time % 60).padStart(2, '0');
+    //print remaining time
+    labelTimer.textContent = `${min}:${sec}`;
+    //when 0, stop timer and logout
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+    //decrese 1 sec
+    time--;
+  };
+  //set time to 10 mins
+  let time = 600;
+  //call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
 
-let currentAccount;
+let currentAccount, timer;
 
-//fake always logged in
-
-//////////////////////////////////////////////current account!!!
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 1;
-//////////////////////////////////////////////current account!!!
+//log in
 
 btnLogin.addEventListener('click', (e) => {
   e.preventDefault();
@@ -185,7 +202,7 @@ btnLogin.addEventListener('click', (e) => {
   );
   if (currentAccount?.pin === +inputLoginPin.value) {
     // display UI & message
-    labelWelcome.innerHTML = `Welcome back, ${
+    labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 1;
@@ -216,6 +233,10 @@ btnLogin.addEventListener('click', (e) => {
     //clear inputs fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
     updateUI(currentAccount);
   }
 });
@@ -243,6 +264,9 @@ btnTransfer.addEventListener('click', (e) => {
     receiverAcc.movementsDates.push(new Date().toISOString());
     //update UI
     updateUI(currentAccount);
+    //reset the timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
   inputTransferAmount.value = inputTransferTo.value = '';
 });
@@ -256,11 +280,15 @@ btnLoan.addEventListener('click', (e) => {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount / 10)
   ) {
-    currentAccount.movements.push(amount);
-    //add loan date
-    currentAccount.movementsDates.push(new Date().toISOString());
+    setTimeout(function () {
+      currentAccount.movements.push(amount);
+      //add loan date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    updateUI(currentAccount);
+      updateUI(currentAccount);
+      clearInterval(timer);
+      timer = startLogOutTimer();
+    }, 2000);
   }
   inputLoanAmount.value = '';
 });
@@ -289,6 +317,6 @@ let sorted = false;
 
 btnSort.addEventListener('click', (e) => {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
