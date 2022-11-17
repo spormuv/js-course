@@ -170,10 +170,6 @@ updateUI(currentAccount);
 containerApp.style.opacity = 1;
 //////////////////////////////////////////////current account!!!
 
-//internationalizing dates!!!
-
-//internationalizing dates!!!
-
 btnLogin.addEventListener('click', (e) => {
   e.preventDefault();
   currentAccount = accounts.find(
