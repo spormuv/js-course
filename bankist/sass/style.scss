@@ -1,0 +1,55 @@
+@import 'blocks/nav';
+@import 'blocks/balance';
+@import 'blocks/movements';
+@import 'blocks/summary';
+@import 'blocks/operations';
+@import 'blocks/timer';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  padding: 2rem;
+  position: relative;
+
+  font-family: 'Poppins', sans-serif;
+  color: #444;
+
+  background-color: #f3f3f3;
+}
+
+.app {
+  max-width: 100rem;
+  margin: 4rem auto;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  grid-template-rows: auto repeat(3, 15rem) auto;
+  gap: 2rem;
+
+  opacity: 0;
+  transition: all 1s;
+}
+
+.footer {
+  width: calc(100% - 4rem);
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+
+  font-size: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
