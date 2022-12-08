@@ -1,3 +1,7 @@
+.section__title--testimonials {
+  margin-bottom: 4rem;
+}
+
 .slider {
   position: relative;
 
@@ -81,5 +85,58 @@
       background-color: #888;
       opacity: 1;
     }
+  }
+}
+
+/* testimonials */
+
+.testimonial {
+  position: relative;
+  width: 65%;
+  &::before {
+    content: '\201C';
+    position: absolute;
+    top: -5.7rem;
+    left: -6.8rem;
+    z-index: -1;
+
+    font-size: 20rem;
+    font-family: inherit;
+    line-height: 1;
+    color: $color-primary;
+  }
+  &__header {
+    font-size: 2.25rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  &__text {
+    font-size: 1.7rem;
+    margin-bottom: 3.5rem;
+    color: #666;
+  }
+  &__author {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    column-gap: 2rem;
+
+    margin-left: 3rem;
+
+    font-style: normal;
+  }
+  &__photo {
+    grid-row: 1 / span 2;
+    width: 6.5rem;
+    border-radius: 50%;
+  }
+  &__name {
+    align-self: end;
+    margin: 0;
+
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+  &__location {
+    font-size: 1.5rem;
   }
 }
