@@ -12,10 +12,12 @@ import {
   btnScrollTo,
   section1,
   tabsContainer,
+  nav,
 } from './modules/variables';
 
 // modules
 import { tabToggle } from './modules/tabs';
+import { handleHover } from './modules/menu';
 
 // modal window
 const openModal = function (e) {
@@ -69,3 +71,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // tabbed component
 tabsContainer.addEventListener('click', tabToggle);
+
+//menu fade animation
+nav.addEventListener('pointerover', handleHover.bind(0.5));
+nav.addEventListener('pointerout', handleHover.bind(1));
