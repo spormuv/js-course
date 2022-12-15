@@ -1,9 +1,10 @@
 'use strict';
 
+// import html and css
 import './index.html';
 import './index.scss';
 
-// variables
+// import variables
 import {
   modal,
   overlay,
@@ -13,11 +14,13 @@ import {
   section1,
   tabsContainer,
   nav,
+  header,
 } from './modules/variables';
 
-// modules
+// import modules
 import { tabToggle } from './modules/tabs';
 import { handleHover } from './modules/menu';
+import { headerObserver } from './modules/nav_sticky';
 
 // modal window
 const openModal = function (e) {
@@ -42,18 +45,6 @@ document.addEventListener('keydown', function (e) {
 
 // button scrolling
 btnScrollTo.addEventListener('click', function () {
-  // const s1coords = section1.getBoundingClientRect();
-
-  // window.scrollTo(
-  //   s1coords.left + window.scrollX,
-  //   s1coords.top + window.scrollY
-  // );
-
-  // window.scrollTo({
-  //   left: s1coords.left + window.scrollX,
-  //   top: s1coords.top + window.scrollY,
-  //   behavior: 'smooth',
-  // });
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -75,3 +66,6 @@ tabsContainer.addEventListener('click', tabToggle);
 //menu fade animation
 nav.addEventListener('pointerover', handleHover.bind(0.5));
 nav.addEventListener('pointerout', handleHover.bind(1));
+
+// sticky navigation
+headerObserver.observe(header);
