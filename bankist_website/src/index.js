@@ -4,12 +4,18 @@ import './index.html';
 import './index.scss';
 
 // variables
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.btn--close-modal');
-const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+import {
+  modal,
+  overlay,
+  btnCloseModal,
+  btnsOpenModal,
+  btnScrollTo,
+  section1,
+  tabsContainer,
+} from './modules/variables';
+
+// modules
+import { tabToggle } from './modules/tabs';
 
 // modal window
 const openModal = function (e) {
@@ -46,7 +52,6 @@ btnScrollTo.addEventListener('click', function () {
   //   top: s1coords.top + window.scrollY,
   //   behavior: 'smooth',
   // });
-
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -61,3 +66,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// tabbed component
+tabsContainer.addEventListener('click', tabToggle);
