@@ -12,15 +12,13 @@ import {
   btnsOpenModal,
   btnScrollTo,
   section1,
-  tabsContainer,
-  nav,
-  header,
 } from './modules/variables';
 
 // import modules
-import { tabToggle } from './modules/tabs';
-import { handleHover } from './modules/menu';
-import { headerObserver } from './modules/nav_sticky';
+import './modules/tabs';
+import './modules/menu_opacity';
+import './modules/nav_sticky';
+import './modules/reveal_section';
 
 // modal window
 const openModal = function (e) {
@@ -60,12 +58,10 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
-// tabbed component
-tabsContainer.addEventListener('click', tabToggle);
+// tabbed component (code in the connected module !!!)
 
-//menu fade animation
-nav.addEventListener('pointerover', handleHover.bind(0.5));
-nav.addEventListener('pointerout', handleHover.bind(1));
+// menu fade animation (code in the connected module !!!)
 
-// sticky navigation
-headerObserver.observe(header);
+// sticky navigation (code in the connected module !!!)
+
+// reveal sections (code in the connected module !!!)

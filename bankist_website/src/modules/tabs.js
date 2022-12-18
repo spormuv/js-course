@@ -1,6 +1,6 @@
-import { tabs, tabsContent } from './variables';
+import { tabs, tabsContent, tabsContainer } from './variables';
 
-export function tabToggle(e) {
+function tabToggle(e) {
   const clicked = e.target.closest('.operations__tab');
   if (!clicked) return;
 
@@ -12,3 +12,5 @@ export function tabToggle(e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 }
+
+tabsContainer.addEventListener('click', tabToggle);

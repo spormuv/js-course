@@ -1,4 +1,4 @@
-import { nav } from './variables';
+import { nav, header } from './variables';
 
 const stickyNav = function (entries) {
   const [entry] = entries;
@@ -6,8 +6,10 @@ const stickyNav = function (entries) {
   else nav.classList.remove('sticky');
 };
 
-export const headerObserver = new IntersectionObserver(stickyNav, {
+const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
   rootMargin: -nav.offsetHeight + 'px',
 });
+
+headerObserver.observe(header);
