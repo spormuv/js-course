@@ -12,3 +12,4 @@ export const tabsContent = document.querySelectorAll('.operations__content');
 export const nav = document.querySelector('.nav');
 export const header = document.querySelector('.header');
 export const allSections = document.querySelectorAll('.section');
+export const imgTargets = document.querySelectorAll('img[data-src]');
