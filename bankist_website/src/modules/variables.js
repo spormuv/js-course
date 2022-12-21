@@ -13,3 +13,7 @@ export const nav = document.querySelector('.nav');
 export const header = document.querySelector('.header');
 export const allSections = document.querySelectorAll('.section');
 export const imgTargets = document.querySelectorAll('img[data-src]');
+export const slides = document.querySelectorAll('.slide');
+export const btnLeft = document.querySelector('.slider__btn--left');
+export const btnRight = document.querySelector('.slider__btn--right');
+export const dotContainer = document.querySelector('.dots');
