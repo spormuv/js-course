@@ -14,3 +14,4 @@ import './modules/tabs';
 import './modules/reveal_section';
 import './modules/lazy_img';
 import './modules/slider';
+import './modules/hamburger';

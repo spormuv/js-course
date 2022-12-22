@@ -17,3 +17,5 @@ export const slides = document.querySelectorAll('.slide');
 export const btnLeft = document.querySelector('.slider__btn--left');
 export const btnRight = document.querySelector('.slider__btn--right');
 export const dotContainer = document.querySelector('.dots');
+export const hamburgerBtn = document.querySelector('.nav__btn');
+export const navLinks = document.querySelector('.nav__links');
