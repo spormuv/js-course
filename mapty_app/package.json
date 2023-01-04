@@ -32,6 +32,6 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "typed.js": "^2.0.12"
+    "leaflet": "^1.9.3"
   }
 }
