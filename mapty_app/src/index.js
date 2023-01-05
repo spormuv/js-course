@@ -3,7 +3,7 @@
 import './index.html';
 import './style.scss';
 
-// import library
+// import libraries
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 delete L.Icon.Default.prototype._getIconUrl;
@@ -12,6 +12,7 @@ L.Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
+import { nanoid } from 'nanoid';
 
 // variables
 const months = [
@@ -36,6 +37,48 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+// class workout
+class Workout {
+  date = new Date();
+  // id = (Date.now() + '').slice(-10);
+  id = nanoid(10);
+  constructor(coords, distance, duration) {
+    this.coords = coords; // [lat, lng]
+    this.distance = distance; // km
+    this.duration = duration; // min
+  }
+}
+
+// class running
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcPace();
+  }
+  calcPace() {
+    // min/km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+// class cycling
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.calcSpeed();
+  }
+  calcSpeed() {
+    // km/h
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+///////////////////////////////////////////////////////////////
+// class app
 class App {
   #map;
   #mapEvent;
