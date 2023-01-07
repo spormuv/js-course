@@ -3,6 +3,7 @@
   padding: 3rem 5rem 4rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   background-color: var(--color-dark--1);
   &__logo {
@@ -10,10 +11,23 @@
     align-self: center;
     margin-bottom: 4rem;
   }
+  &__btn {
+    margin-top: 2rem;
+    padding: 0.5rem 2rem;
+
+    font-size: 1.5rem;
+    color: var(--color-light--1);
+
+    border-radius: 5px;
+    border: none;
+    background-color: var(--color-dark--2);
+    cursor: pointer;
+  }
 }
 
 .workouts {
   height: calc(77vh - 9.25rem);
+  margin-top: 1.75rem;
   list-style: none;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -72,7 +86,6 @@
 
   height: 9.25rem;
   padding: 1.5rem 2.75rem;
-  margin-bottom: 1.75rem;
 
   border-radius: 5px;
   background-color: var(--color-dark--2);
@@ -116,7 +129,7 @@
 }
 
 .copyright {
-  margin-top: auto;
+  margin-top: 1rem;
   font-size: 1.3rem;
   text-align: center;
   color: var(--color-light--1);

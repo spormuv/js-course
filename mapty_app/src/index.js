@@ -5,6 +5,7 @@ import './style.scss';
 
 /////////////////////////////////////////////////////////////////////
 ///// import libraries
+
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,6 +18,7 @@ import { nanoid } from 'nanoid';
 
 /////////////////////////////////////////////////////////////////////
 ///// variables
+
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
@@ -24,9 +26,11 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const btn = document.querySelector('.sidebar__btn');
 
 /////////////////////////////////////////////////////////////////////
 ///// class workout
+
 class Workout {
   date = new Date();
   id = nanoid(10);
@@ -62,7 +66,8 @@ class Workout {
 }
 
 /////////////////////////////////////////////////////////////////////
-///// class running
+///// class Running
+
 class Running extends Workout {
   type = 'running';
   constructor(coords, distance, duration, cadence) {
@@ -79,7 +84,8 @@ class Running extends Workout {
 }
 
 /////////////////////////////////////////////////////////////////////
-///// class cycling
+///// class Cycling
+
 class Cycling extends Workout {
   type = 'cycling';
   constructor(coords, distance, duration, elevationGain) {
@@ -96,7 +102,8 @@ class Cycling extends Workout {
 }
 
 ///////////////////////////////////////////////////////////////
-///// class app
+///// class App
+
 class App {
   #map;
   #mapZoomLevel = 13;
@@ -105,6 +112,7 @@ class App {
 
   constructor() {
     this._getPosition();
+    this._getLocalStorage();
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -132,6 +140,10 @@ class App {
 
     // handling clicks on map
     this.#map.on('click', this._showForm.bind(this));
+    // render workout markers
+    this.#workouts.forEach((work) => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(mapE) {
@@ -198,6 +210,8 @@ class App {
     this._renderWorkout(workout);
     // hide form + clear input fields
     this._hideForm();
+    // set local storage to all workouts
+    this._setLocalStorage();
   }
   _renderWorkoutMarker(workout) {
     L.marker(workout.coords)
@@ -281,9 +295,45 @@ class App {
 
     // using the publick interface
     workout.click();
+    this._setLocalStorage();
+  }
+
+  // using local storage
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+  _getLocalStorage() {
+    if (!localStorage.length) return;
+
+    const data = [];
+    JSON.parse(localStorage.getItem('workouts')).forEach((item) => {
+      if (item.type === 'running') {
+        Object.setPrototypeOf(item, Running.prototype);
+      }
+      if (item.type === 'cycling') {
+        Object.setPrototypeOf(item, Cycling.prototype);
+      }
+      data.push(item);
+    });
+
+    // const data = JSON.parse(localStorage.getItem('workouts'));
+    // if (!data) return;
+    this.#workouts = data;
+    this.#workouts.forEach((work) => {
+      this._renderWorkout(work);
+    });
   }
 }
 
 /////////////////////////////////////////////////////////////////////
 ///// creating new App
+
 const app = new App();
+
+/////////////////////////////////////////////////////////////////////
+///// reseting the data
+
+btn.addEventListener('click', () => {
+  localStorage.clear();
+  location.reload();
+});

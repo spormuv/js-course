@@ -1,0 +1,42 @@
+@media (max-width: 1199px) {
+  .sidebar {
+    flex: 0 0 35vw;
+  }
+  .form {
+    height: unset;
+    min-width: 225px;
+    grid-template-columns: 1fr;
+  }
+  .workout {
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 225px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    padding: 2rem;
+    &__logo {
+      margin-bottom: 2rem;
+    }
+  }
+  .form {
+    min-width: unset;
+  }
+  .form * {
+    font-size: 1.3rem;
+  }
+  .form__row:not(.form__row--hidden) {
+    display: block;
+  }
+  .workout * {
+    font-size: 1.1rem;
+  }
+  .workout {
+    grid-template-columns: 1fr;
+    min-width: unset;
+    &__title {
+      font-size: 1.3rem;
+    }
+  }
+}
