@@ -303,10 +303,12 @@ class App {
     localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
   _getLocalStorage() {
-    if (!localStorage.length) return;
-
+    const localData = localStorage.getItem('workouts');
     const data = [];
-    JSON.parse(localStorage.getItem('workouts')).forEach((item) => {
+
+    if (!localData) return;
+
+    JSON.parse(localData).forEach((item) => {
       if (item.type === 'running') {
         Object.setPrototypeOf(item, Running.prototype);
       }
