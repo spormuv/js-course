@@ -4,7 +4,7 @@ Here are finished educational projects from [The Complete JavaScript Course](htt
 
 ## These projects are:
 
-- _[Forkify App]()_
+- _[Forkify App](https://forkify-spormuv.netlify.app/)_
 - _[Mapty App](https://spormuv.github.io/js-course/mapty_app/dist/)_
 - _[Bankist Website](https://spormuv.github.io/js-course/bankist_website/dist/)_
 - _[Bankist App](https://spormuv.github.io/js-course/bankist/)_
