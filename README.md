@@ -1,6 +1,6 @@
 # JavaScript Course
 
-Here are finished educational projects from [The Complete JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
+Here are completed educational projects from [The Complete JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
 
 ## These projects are:
 
